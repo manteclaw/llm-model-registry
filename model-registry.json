@@ -1,0 +1,203 @@
+{
+  "version": 2,
+  "providers": {
+    "groq": {
+      "base_url": "https://api.groq.com/openai/v1",
+      "api_key_env": "GROQ_API_KEY",
+      "rpm": 30,
+      "models": {
+        "fast": "llama-3.1-8b-instant",
+        "smart": "llama-3.3-70b-versatile"
+      },
+      "deprecated": [
+        "llama3-8b-8192",
+        "llama2-70b-4096"
+      ],
+      "fallback": "cerebras",
+      "cost_per_1k_input_tokens": 0,
+      "cost_per_1k_output_tokens": 0,
+      "pricing_note": "Free tier"
+    },
+    "cerebras": {
+      "base_url": "https://api.cerebras.ai/v1",
+      "api_key_env": "CEREBRAS_API_KEY",
+      "rpm": 30,
+      "models": {
+        "fast": "llama3.1-8b",
+        "smart": "llama3.1-70b"
+      },
+      "deprecated": [
+        "llama3.1-70b"
+      ],
+      "fallback": "litellm",
+      "cost_per_1k_input_tokens": 0,
+      "cost_per_1k_output_tokens": 0,
+      "pricing_note": "Free tier"
+    },
+    "mistral": {
+      "base_url": "https://api.mistral.ai/v1",
+      "api_key_env": "MISTRAL_API_KEY",
+      "rpm": 20,
+      "models": {
+        "fast": "mistral-small-latest",
+        "smart": "mistral-medium-latest"
+      },
+      "deprecated": [],
+      "fallback": "litellm",
+      "cost_per_1k_input_tokens": 0.0002,
+      "cost_per_1k_output_tokens": 0.0006,
+      "pricing_note": "$0.20/$0.60 per 1M tokens"
+    },
+    "openrouter": {
+      "base_url": "https://openrouter.ai/api/v1",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "rpm": 10,
+      "models": {
+        "fast": "google/gemma-3-27b-it:free",
+        "smart": "deepseek/deepseek-r1:free",
+        "free": "deepseek/deepseek-r1:free"
+      },
+      "deprecated": [
+        "google/gemma-3-27b-it:free",
+        "deepseek/deepseek-r1:free"
+      ],
+      "fallback": "litellm",
+      "cost_per_1k_input_tokens": 0,
+      "cost_per_1k_output_tokens": 0,
+      "pricing_note": "Free models only"
+    },
+    "nvidia": {
+      "base_url": "https://integrate.api.nvidia.com/v1",
+      "api_key_env": "NVIDIA_API_KEY",
+      "rpm": 60,
+      "models": {
+        "fast": "nvidia/llama-3.1-nemotron-70b-instruct",
+        "smart": "nvidia/llama-3.1-nemotron-70b-instruct"
+      },
+      "deprecated": [],
+      "fallback": "litellm",
+      "cost_per_1k_input_tokens": 0,
+      "cost_per_1k_output_tokens": 0,
+      "pricing_note": "Free tier"
+    },
+    "cloudflare": {
+      "base_url": "https://api.cloudflare.com/client/v4/ai",
+      "api_key_env": "CLOUDFLARE_API_KEY",
+      "rpm": 100,
+      "models": {
+        "fast": "@cf/meta/llama-3.1-8b-instruct",
+        "smart": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "vision": "@cf/meta/llama-3.2-11b-vision-instruct"
+      },
+      "deprecated": [],
+      "fallback": "portkey",
+      "cost_per_1k_input_tokens": 0,
+      "cost_per_1k_output_tokens": 0,
+      "pricing_note": "Free tier",
+      "notes": "Vision model requires license agreement acceptance (use 'agree' prompt once)"
+    },
+    "portkey": {
+      "base_url": "https://api.portkey.ai/v1",
+      "api_key_env": "PORTKEY_API_KEY",
+      "rpm": 50,
+      "models": {
+        "fast": "llama-3.1-8b-instant",
+        "smart": "llama-3.3-70b-versatile"
+      },
+      "deprecated": [],
+      "fallback": "litellm",
+      "cost_per_1k_input_tokens": 0,
+      "cost_per_1k_output_tokens": 0,
+      "pricing_note": "Pass-through \u2014 actual cost depends on underlying provider"
+    },
+    "litellm": {
+      "base_url": "http://localhost:4000/v1",
+      "api_key_env": "LITELLM_MASTER_KEY",
+      "rpm": 200,
+      "models": {
+        "fast": "groq/llama-3.1-8b-instant",
+        "smart": "groq/llama-3.3-70b-versatile",
+        "free": "groq/llama-3.1-8b-instant"
+      },
+      "deprecated": [],
+      "fallback": "groq",
+      "cost_per_1k_input_tokens": 0,
+      "cost_per_1k_output_tokens": 0,
+      "pricing_note": "Proxy \u2014 cost follows underlying provider"
+    },
+    "sambanova": {
+      "base_url": "https://api.sambanova.ai/v1",
+      "api_key_env": "SAMBANOVA_API_KEY",
+      "rpm": 30,
+      "models": {
+        "fast": "Meta-Llama-3.1-8B-Instruct",
+        "smart": "Meta-Llama-3.3-70B-Instruct"
+      },
+      "deprecated": [],
+      "fallback": "groq",
+      "cost_per_1k_input_tokens": 0.0006,
+      "cost_per_1k_output_tokens": 0.0006,
+      "pricing_note": "~$0.60 per 1M tokens, all models paid"
+    }
+  },
+  "task_type_map": {
+    "tcg_card_profile": {
+      "provider": "openrouter",
+      "model": "smart"
+    },
+    "ai_safety": {
+      "provider": "groq",
+      "model": "smart"
+    },
+    "smart_contracts": {
+      "provider": "groq",
+      "model": "smart"
+    },
+    "code_optimization": {
+      "provider": "cerebras",
+      "model": "fast"
+    },
+    "data_structures": {
+      "provider": "cerebras",
+      "model": "fast"
+    },
+    "math": {
+      "provider": "groq",
+      "model": "smart"
+    },
+    "reasoning": {
+      "provider": "groq",
+      "model": "smart"
+    },
+    "compression": {
+      "provider": "cerebras",
+      "model": "fast"
+    },
+    "infrastructure": {
+      "provider": "cerebras",
+      "model": "fast"
+    },
+    "vision": {
+      "provider": "cloudflare",
+      "model": "vision"
+    },
+    "general": {
+      "provider": "portkey",
+      "model": "fast"
+    },
+    "lite": {
+      "provider": "litellm",
+      "model": "free"
+    },
+    "unknown": {
+      "provider": "litellm",
+      "model": "free"
+    }
+  },
+  "circuit_breaker": {
+    "failure_threshold": 5,
+    "recovery_timeout_seconds": 300,
+    "half_open_requests": 2
+  },
+  "last_updated": "2026-11-23T17:15:08.977930+00:00"
+}
